@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-root',
   template: `
-    <h1> Hello world</h1>
+    <app-customers></app-customers>
   `
 })
 export class AppComponent implements OnInit{
@@ -14,21 +14,3 @@ export class AppComponent implements OnInit{
 
   }
 }
-
-
-// import { Component, OnInit } from '@angular/core';
-
-// @Component({ 
-//   selector: 'app-root',
-//   template: `
-//     <app-customers></app-customers>
-//   `
-// })
-// export class AppComponent implements OnInit {
-//   constructor() { }
-
-//   ngOnInit() {
-
-//   }
-  
-// }
