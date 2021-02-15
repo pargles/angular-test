@@ -9,3 +9,21 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'angular-test';
 }
+
+
+// import { Component, OnInit } from '@angular/core';
+
+// @Component({ 
+//   selector: 'app-root',
+//   template: `
+//     <app-customers></app-customers>
+//   `
+// })
+// export class AppComponent implements OnInit {
+//   constructor() { }
+
+//   ngOnInit() {
+
+//   }
+  
+// }
