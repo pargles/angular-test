@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { HttpClientModule } from '@angular/common/http';
 
 import { ICustomer, IOrder } from '../../app/shared/interfaces';
 
@@ -11,9 +12,40 @@ export class DataService {
 
     baseUrl: string = 'assets/';
     
-    constructor() { }
+    constructor(private http: HttpClient) { }
 
+    getCustomers() : Observable<ICustomer[]> {
+        const url = this.baseUrl + 'customers.json'
+        console.log("url is: ", url)
+        return this.http.get<ICustomer[]>(url)
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+    
+    getCustomer(id: number) : Observable<ICustomer> {
+        const url = this.baseUrl + 'customers.json'
+        console.log("url is: ", url)
+      return this.http.get<ICustomer[]>(url)
+        .pipe(
+          map(customers => {
+            let customer = customers.filter((cust: ICustomer) => cust.id === id);
+            return (customer && customer.length) ? customer[0] : null;
+          }),
+          catchError(this.handleError)
+        )
+    }
 
+    getOrders(id: number) : Observable<IOrder[]> {
+      return this.http.get<IOrder[]>(this.baseUrl + 'orders.json')
+        .pipe(
+          map(orders => {
+            let custOrders = orders.filter((order: IOrder) => order.customerId === id);
+            return custOrders;
+          }),
+          catchError(this.handleError)
+        );
+    }
 
 
     private handleError(error: any) {
